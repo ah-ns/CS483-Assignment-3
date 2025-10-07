@@ -37,7 +37,9 @@ public class Feedback {
         return result; // resturns the square combination 
     }
 	
+
+
 	public boolean isCorrect(String secret, String guess) {
-		return secret.compareTo(guess) == 0 ? true : false;
+		return secret.equals(guess);
 	}
 }

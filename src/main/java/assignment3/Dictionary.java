@@ -35,6 +35,11 @@ public class Dictionary {
 			if ((int) current < lower | (int) current > upper)
 				return false;
 		}
+
+		if (word.length() != 5) { 
+			return false; 
+		}
+
 		return true;
 	}
 	

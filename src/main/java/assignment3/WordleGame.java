@@ -26,14 +26,15 @@ public class WordleGame {
 	
 	public void makeGuess(String guess) {
 		if (guess == null) {
-			System.out.println("Guess cannot be null")
+			System.out.println("Guess cannot be null");
 		}
 		
         guess = guess.trim().toLowerCase();
         
         //check if word is valid
         if (!dict.isValidWord(guess)) {
-			System.out.println("Guess does not follow the requirements")
+			System.out.println("Guess does not follow the requirements");
+			return;
         }
        
       
@@ -43,7 +44,7 @@ public class WordleGame {
 	}
 	
 	public boolean isGameOver() {
-		if (this.guesses > 0 || !this.feedback.isCorrect(this.secret, this.guess))
+		if (this.guesses > 0 && !this.feedback.isCorrect(this.secret, this.guess))
 			return false;
 		else
 			return true;
@@ -52,6 +53,10 @@ public class WordleGame {
 	public String getSecretWord() {
 		return this.secret;
 	}
+
+	public boolean lastGuessCorrect() {
+        return (guess != null) && feedback.isCorrect(secret, guess);
+    }
 	
     public int getRemainingGuesses() {
         return this.guesses;
@@ -64,9 +69,8 @@ public class WordleGame {
 	public static void main(String[] args) {
 	    WordleGame game = new WordleGame();
 	    java.util.Scanner scanner = new java.util.Scanner(System.in);
-	    
-		System.out.println("Hello, Welcome to buggy wordle by Christopher and Hans")
-		
+
+		System.out.println("Hello, Welcome to buggy wordle by Chris and Hans");
 	    while (!game.isGameOver()) {
 	        System.out.println("Enter your guess:" + game.getRemainingGuesses() + " left");
 	        String input = scanner.nextLine();
@@ -75,12 +79,14 @@ public class WordleGame {
 	        System.out.println("Feedback: " + game.getLastPattern());
 
 	        if (game.lastGuessCorrect()) {
-	        	System.out.println("Correct! You won";
-	        			break;
+	        	System.out.println("Correct! You won");
+	        		break;
 	        }
 	    }
 		
-	    if (!game.lastGuessCorrect()) {
+
+
+	    if (game.isGameOver()) {
 	        System.out.println("\n Out of guesses! The word was: " + game.getSecretWord());
 	    }
 	    scanner.close();
