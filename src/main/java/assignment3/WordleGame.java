@@ -6,11 +6,13 @@ public class WordleGame {
 	private String guess;
 	private int guesses;
 	private Feedback feedback;
+	private Dictionary dict;
 	
 	public WordleGame() {
 		this.secret = "apple";
 		this.guesses = 6;
 		this.feedback = new Feedback();
+		this.dict = new Dictionary();
 	}
 	
 	public void startGame() {
@@ -29,7 +31,7 @@ public class WordleGame {
 	}
 	
 	public String getSecretWord() {
-		return this.secret;
+		return "";
 	}
 	
 	public static void main(String[] args) {
