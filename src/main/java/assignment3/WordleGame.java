@@ -7,6 +7,7 @@ public class WordleGame {
 	private int guesses;
 	private Feedback feedback;
 	private Dictionary dict;
+	private String lastPattern;
 	
 	public WordleGame() {
 		this.secret = "apple";
@@ -16,25 +17,72 @@ public class WordleGame {
 	}
 	
 	public void startGame() {
+		this.secret = dict.getRandomWord().toLowerCase();
+		this.guesses = 6;
+		this.guess = null;
+        this.lastPattern = null;
 		
 	}
 	
 	public void makeGuess(String guess) {
+		if (guess == null) {
+			System.out.println("Guess cannot be null")
+		}
 		
+        guess = guess.trim().toLowerCase();
+        
+        //check if word is valid
+        if (!dict.isValidWord(guess)) {
+			System.out.println("Guess does not follow the requirements")
+        }
+       
+      
+        this.guess = guess;
+        this.lastPattern = feedback.getPattern(secret, guess);
+        this.guesses--;
 	}
 	
 	public boolean isGameOver() {
-		if (this.guesses > 0 | !this.feedback.isCorrect(this.secret, this.guess))
+		if (this.guesses > 0 || !this.feedback.isCorrect(this.secret, this.guess))
 			return false;
 		else
 			return true;
 	}
 	
 	public String getSecretWord() {
-		return "";
+		return this.secret;
 	}
 	
+    public int getRemainingGuesses() {
+        return this.guesses;
+    }
+    
+    public String getLastPattern() {
+    	return this.lastPattern;
+    }
+	
 	public static void main(String[] args) {
+	    WordleGame game = new WordleGame();
+	    java.util.Scanner scanner = new java.util.Scanner(System.in);
+	    
+		System.out.println("Hello, Welcome to buggy wordle by Christopher and Hans")
 		
+	    while (!game.isGameOver()) {
+	        System.out.println("Enter your guess:" + game.getRemainingGuesses() + " left");
+	        String input = scanner.nextLine();
+
+	        game.makeGuess(input);
+	        System.out.println("Feedback: " + game.getLastPattern());
+
+	        if (game.lastGuessCorrect()) {
+	        	System.out.println("Correct! You won";
+	        			break;
+	        }
+	    }
+		
+	    if (!game.lastGuessCorrect()) {
+	        System.out.println("\n Out of guesses! The word was: " + game.getSecretWord());
+	    }
+	    scanner.close();
 	}
 }
