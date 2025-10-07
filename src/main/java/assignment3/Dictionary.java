@@ -1,7 +1,7 @@
 /**
  * Purpose: Generate random words from a list, check if guesses are valid
  * 
- * @author Hans van Lierop
+ * @author Hans van Lierop, Christopher Saia
  * @version 1
  */
 package assignment3;
@@ -10,7 +10,7 @@ import java.time.LocalTime;
 
 public class Dictionary {
 
-	String[] words = {
+	private final String[] words = {
 			"apple", "these", "super", "paint", "clean",
 			"jesty", "apply", "wrong", "curry", "drain",
 			"slain", "sword", "irate", "crazy", "close"
