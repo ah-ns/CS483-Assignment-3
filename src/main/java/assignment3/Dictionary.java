@@ -36,10 +36,6 @@ public class Dictionary {
 				return false;
 		}
 
-		if (word.length() != 5) { 
-			return false; 
-		}
-
 		return true;
 	}
 	
@@ -50,7 +46,7 @@ public class Dictionary {
 	 */
 	public String getRandomWord() {
 		// Generate random number from current time
-		int randomNum = LocalTime.now().getSecond() % (this.words.length);
+		int randomNum = LocalTime.now().getMinute() % (this.words.length);
 		// Return element at the random index
 		return this.words[randomNum];
 	}
